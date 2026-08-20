@@ -6,6 +6,8 @@
 <meta name="description" content="Resúmenes narrados de manhwa en español del canal Offline Online.">
 <meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme:dark)">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)">
+<link rel="icon" href="marca/logo.png">
+<link rel="apple-touch-icon" href="marca/logo.png">
 <style>
 :root{
   color-scheme:light dark;
@@ -26,6 +28,25 @@
   --sombra:none;
 }
 *{box-sizing:border-box}
+
+/* El banner va de fondo, MUY atenuado y solo arriba, con un degradado que lo
+   funde con el color de la página. Sin ese degradado el corte se nota como
+   una raya y el texto que cae encima pierde contraste justo donde empieza a
+   leerse. La opacidad es distinta por tema: sobre fondo claro, una imagen
+   oscura ensucia mucho más rápido. */
+.fondo-banner{position:fixed;top:0;left:0;right:0;height:340px;z-index:-1;
+  background-position:center top;background-size:cover;background-repeat:no-repeat;
+  opacity:.20;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 35%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 35%,transparent 100%);
+  pointer-events:none}
+:root:not([data-tema="oscuro"]) .fondo-banner{opacity:.10}
+@media (prefers-color-scheme:dark){
+  :root:not([data-tema="claro"]) .fondo-banner{opacity:.20}
+}
+.marca{display:flex;align-items:center;gap:12px;min-width:0}
+.marca img{width:44px;height:44px;border-radius:11px;flex:none;display:block}
+@media (min-width:620px){.marca img{width:56px;height:56px;border-radius:14px}}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--fondo);color:var(--texto);line-height:1.6;
      font-size:16px;
@@ -82,6 +103,9 @@ footer{margin-top:44px;border-top:1px solid var(--linea);padding-top:16px}
 footer p{overflow-wrap:anywhere}
 .redes a{margin-right:2px}
 .redes-grandes{display:flex;flex-wrap:wrap;gap:0}
+form label{display:block;margin:10px 0 2px}
+textarea.buscador{resize:vertical;min-height:96px}
+select.buscador{appearance:none;-webkit-appearance:none}
 
 @media (min-width:620px){
   .envoltorio{padding:28px 20px 80px}
@@ -101,10 +125,10 @@ footer p{overflow-wrap:anywhere}
   }catch(e){}
 })();
 </script>
-</head><body><div class="envoltorio">
+</head><body><div class="fondo-banner" style="background-image:url(marca/banner.jpg)" aria-hidden="true"></div><div class="envoltorio">
 <header>
   <div class="fila-titulo">
-    <h1>Offline Online</h1>
+    <div class="marca"><img src="marca/logo.png" alt="Logo de Offline Online" width="56" height="56"><h1>Offline Online</h1></div>
     <button class="tema" id="tema" type="button" aria-label="Cambiar de tema">&#9790;</button>
   </div>
   <nav><a href="index.html">Inicio</a> <a href="series.html" aria-current="page">Series</a> <a href="creditos.html">Créditos y licencias</a></nav>
@@ -112,7 +136,7 @@ footer p{overflow-wrap:anywhere}
 
 <p class="suave chico">Lo que ya salió, lo que está en producción y lo que viene.</p>
 <h2>En el canal</h2><p class="suave chico nota-seccion">Ya publicados. Se ven ahora mismo en YouTube.</p><div class="rejilla"><article class="serie"><img class="tapa" src="portadas/superhuman-streamer.jpg" alt="Portada de Superhuman Streamer" loading="lazy" decoding="async"><div class="cuerpo"><span class="etiqueta canal">En el canal</span><h3>Superhuman Streamer</h3><p class="suave chico">Capítulos publicados: 0-24</p></div></article><article class="serie"><img class="tapa" src="portadas/the-ember-knight.jpg" alt="Portada de The Ember Knight" loading="lazy" decoding="async"><div class="cuerpo"><span class="etiqueta canal">En el canal</span><h3>The Ember Knight</h3><p class="suave chico">Capítulos publicados: 1-22</p></div></article><article class="serie"><img class="tapa" src="portadas/the-postman-of-the-apocalypse.jpg" alt="Portada de The Postman of the Apocalypse" loading="lazy" decoding="async"><div class="cuerpo"><span class="etiqueta canal">En el canal</span><h3>The Postman of the Apocalypse</h3><p class="suave chico">Capítulos publicados: 1-13</p></div></article></div><h2>En producción</h2><p class="suave chico nota-seccion">Con guion en curso. Salen próximamente.</p><div class="rejilla"><article class="serie"><div class="franja"></div><div class="cuerpo"><span class="etiqueta">En producción</span><h3>Miro in Memory</h3><p class="chico">Un mundo post-apocalíptico lleno de misterios y secretos, nuestro prota sueña con ser un Heroé, pero no tiene el poder para cumplir su sueño hasta que...</p></div></article></div><h2>Próximamente</h2><p class="suave chico nota-seccion">En la lista para cubrir más adelante.</p><div class="rejilla"><article class="serie"><img class="tapa" src="portadas/blood-system.jpg" alt="Portada de Blood System" loading="lazy" decoding="async"><div class="cuerpo"><span class="etiqueta">Próximamente</span><h3>Blood System</h3><p class="chico">Un prota aspirante a héroe y con un código de No matar a personas, termina siendo transformado en todo lo contrario.</p></div></article><article class="serie"><div class="franja"></div><div class="cuerpo"><span class="etiqueta">Próximamente</span><h3>Healing Agency</h3><p class="chico">Un tipo que trabaja como Freelancer exorcizando esperítus malignos a puñetazos.</p></div></article></div>
-<p><a class="boton" href="https://youtube.com/@offlineyonline?sub_confirmation=1">Suscribirme en YouTube</a></p>
+<p><a class="boton" href="https://youtube.com/@offlineyonline?sub_confirmation=1">Suscríbete en YouTube</a></p>
 
 <footer class="suave chico">
   <p>Offline Online · <a href="mailto:cosmosveloz@gmail.com">cosmosveloz@gmail.com</a></p>

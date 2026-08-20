@@ -6,6 +6,8 @@
 <meta name="description" content="Resúmenes narrados de manhwa en español del canal Offline Online.">
 <meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme:dark)">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)">
+<link rel="icon" href="marca/logo.png">
+<link rel="apple-touch-icon" href="marca/logo.png">
 <style>
 :root{
   color-scheme:light dark;
@@ -26,6 +28,25 @@
   --sombra:none;
 }
 *{box-sizing:border-box}
+
+/* El banner va de fondo, MUY atenuado y solo arriba, con un degradado que lo
+   funde con el color de la página. Sin ese degradado el corte se nota como
+   una raya y el texto que cae encima pierde contraste justo donde empieza a
+   leerse. La opacidad es distinta por tema: sobre fondo claro, una imagen
+   oscura ensucia mucho más rápido. */
+.fondo-banner{position:fixed;top:0;left:0;right:0;height:340px;z-index:-1;
+  background-position:center top;background-size:cover;background-repeat:no-repeat;
+  opacity:.20;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 35%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 35%,transparent 100%);
+  pointer-events:none}
+:root:not([data-tema="oscuro"]) .fondo-banner{opacity:.10}
+@media (prefers-color-scheme:dark){
+  :root:not([data-tema="claro"]) .fondo-banner{opacity:.20}
+}
+.marca{display:flex;align-items:center;gap:12px;min-width:0}
+.marca img{width:44px;height:44px;border-radius:11px;flex:none;display:block}
+@media (min-width:620px){.marca img{width:56px;height:56px;border-radius:14px}}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--fondo);color:var(--texto);line-height:1.6;
      font-size:16px;
@@ -82,6 +103,9 @@ footer{margin-top:44px;border-top:1px solid var(--linea);padding-top:16px}
 footer p{overflow-wrap:anywhere}
 .redes a{margin-right:2px}
 .redes-grandes{display:flex;flex-wrap:wrap;gap:0}
+form label{display:block;margin:10px 0 2px}
+textarea.buscador{resize:vertical;min-height:96px}
+select.buscador{appearance:none;-webkit-appearance:none}
 
 @media (min-width:620px){
   .envoltorio{padding:28px 20px 80px}
@@ -101,10 +125,10 @@ footer p{overflow-wrap:anywhere}
   }catch(e){}
 })();
 </script>
-</head><body><div class="envoltorio">
+</head><body><div class="fondo-banner" style="background-image:url(marca/banner.jpg)" aria-hidden="true"></div><div class="envoltorio">
 <header>
   <div class="fila-titulo">
-    <h1>Offline Online</h1>
+    <div class="marca"><img src="marca/logo.png" alt="Logo de Offline Online" width="56" height="56"><h1>Offline Online</h1></div>
     <button class="tema" id="tema" type="button" aria-label="Cambiar de tema">&#9790;</button>
   </div>
   <nav><a href="index.html" aria-current="page">Inicio</a> <a href="series.html">Series</a> <a href="creditos.html">Créditos y licencias</a></nav>
@@ -114,14 +138,14 @@ footer p{overflow-wrap:anywhere}
 de corrido, con la obra a la vista, para que puedas seguirla sin leer capítulo
 por capítulo.</p>
 
-<p><a class="boton" href="https://youtube.com/@offlineyonline?sub_confirmation=1">Suscribirme en YouTube</a>
-<a class="boton sec" href="series.html">Ver qué series hay</a></p>
+<p><a class="boton" href="https://youtube.com/@offlineyonline?sub_confirmation=1">Suscríbete en YouTube</a>
+<a class="boton sec" href="series.html">Ver todas las series</a></p>
 
 <h2>Series</h2>
 <h3>En el canal</h3><ul><li><strong>Superhuman Streamer</strong> <span class="suave chico">— Capítulos publicados: 0-24</span></li><li><strong>The Ember Knight</strong> <span class="suave chico">— Capítulos publicados: 1-22</span></li><li><strong>The Postman of the Apocalypse</strong> <span class="suave chico">— Capítulos publicados: 1-13</span></li></ul><h3>En producción</h3><ul><li><strong>Miro in Memory</strong> <span class="suave chico">— Un mundo post-apocalíptico lleno de misterios y secretos, nuestro prota sueña con ser un Heroé, pero no tiene el poder para cumplir su sueño hasta que...</span></li></ul><h3>Próximamente</h3><ul><li><strong>Blood System</strong> <span class="suave chico">— Un prota aspirante a héroe y con un código de No matar a personas, termina siendo transformado en todo lo contrario.</span></li><li><strong>Healing Agency</strong> <span class="suave chico">— Un tipo que trabaja como Freelancer exorcizando esperítus malignos a puñetazos.</span></li></ul>
 
-<h2>Seguinos</h2>
-<p class="redes-grandes"><a class="boton sec" href="https://youtube.com/@offlineyonline" rel="me">YouTube</a><a class="boton sec" href="https://www.instagram.com/offlineonlineresumen" rel="me">Instagram</a><a class="boton sec" href="https://www.tiktok.com/@offlineyonline" rel="me">TikTok</a><a class="boton sec" href="https://www.facebook.com/offlineYonline/" rel="me">Facebook</a></p>
+<h2>Síguenos</h2>
+<p class="redes-grandes"><a class="boton sec" href="https://youtube.com/@offlineyonline" rel="me">Suscríbete en YouTube</a><a class="boton sec" href="https://www.instagram.com/offlineonlineresumen" rel="me">Instagram</a><a class="boton sec" href="https://www.tiktok.com/@offlineyonline" rel="me">TikTok</a><a class="boton sec" href="https://www.facebook.com/offlineYonline/" rel="me">Facebook</a></p>
 
 <h2>Contacto</h2>
 <div class="tarjeta">
@@ -132,11 +156,51 @@ por capítulo.</p>
      de negocios.</p>
 </div>
 
+<h2>Preguntas, comentarios y recomendaciones</h2>
+<div class="tarjeta">
+  <p>¿Tienes una duda, algo que decir, o un manhwa que te gustaría ver
+     resumido? Este es el lugar.</p>
+  <form id="form-contacto">
+    <label class="suave chico" for="tipo-contacto">¿De qué se trata?</label>
+    <select class="buscador" id="tipo-contacto">
+      <option value="Recomendación">Recomendar un manhwa</option>
+      <option value="Pregunta">Hacer una pregunta</option>
+      <option value="Comentario">Dejar un comentario</option>
+    </select>
+    <label class="suave chico" for="texto-contacto">Cuéntanos</label>
+    <textarea class="buscador" id="texto-contacto" rows="4"
+      placeholder="Escribe aquí tu mensaje…"></textarea>
+    <p><button class="boton" type="submit">Enviar por correo</button></p>
+    <p class="suave chico" id="aviso-contacto">Se abrirá tu programa de correo
+      con el mensaje ya escrito. Si no se abre, escríbenos directamente a
+      <a href="mailto:cosmosveloz@gmail.com">cosmosveloz@gmail.com</a>.</p>
+  </form>
+</div>
+
 <h2>Sobre el material</h2>
 <p>Los resúmenes son obra derivada con fines de comentario y crítica. Los
 derechos de cada manhwa pertenecen a sus autores y editoriales. La música y los
 efectos de sonido tienen su licencia y su autor listados
 <a href="creditos.html">en la página de créditos</a>.</p>
+
+<script>
+(function(){
+  var f = document.getElementById('form-contacto');
+  if (!f) return;
+  f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var tipo  = document.getElementById('tipo-contacto').value;
+    var texto = document.getElementById('texto-contacto').value.trim();
+    if (!texto) { document.getElementById('texto-contacto').focus(); return; }
+    // encodeURIComponent y no escape(): el mensaje trae acentos y saltos de
+    // linea, y escape() los rompe.
+    var url = 'mailto:cosmosveloz@gmail.com'
+            + '?subject=' + encodeURIComponent('[Sitio] ' + tipo)
+            + '&body='    + encodeURIComponent(texto);
+    window.location.href = url;
+  });
+})();
+</script>
 
 <footer class="suave chico">
   <p>Offline Online · <a href="mailto:cosmosveloz@gmail.com">cosmosveloz@gmail.com</a></p>

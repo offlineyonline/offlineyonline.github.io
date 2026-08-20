@@ -6,6 +6,8 @@
 <meta name="description" content="Resúmenes narrados de manhwa en español del canal Offline Online.">
 <meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme:dark)">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)">
+<link rel="icon" href="marca/logo.png">
+<link rel="apple-touch-icon" href="marca/logo.png">
 <style>
 :root{
   color-scheme:light dark;
@@ -26,6 +28,25 @@
   --sombra:none;
 }
 *{box-sizing:border-box}
+
+/* El banner va de fondo, MUY atenuado y solo arriba, con un degradado que lo
+   funde con el color de la página. Sin ese degradado el corte se nota como
+   una raya y el texto que cae encima pierde contraste justo donde empieza a
+   leerse. La opacidad es distinta por tema: sobre fondo claro, una imagen
+   oscura ensucia mucho más rápido. */
+.fondo-banner{position:fixed;top:0;left:0;right:0;height:340px;z-index:-1;
+  background-position:center top;background-size:cover;background-repeat:no-repeat;
+  opacity:.20;
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 35%,transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 35%,transparent 100%);
+  pointer-events:none}
+:root:not([data-tema="oscuro"]) .fondo-banner{opacity:.10}
+@media (prefers-color-scheme:dark){
+  :root:not([data-tema="claro"]) .fondo-banner{opacity:.20}
+}
+.marca{display:flex;align-items:center;gap:12px;min-width:0}
+.marca img{width:44px;height:44px;border-radius:11px;flex:none;display:block}
+@media (min-width:620px){.marca img{width:56px;height:56px;border-radius:14px}}
 html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--fondo);color:var(--texto);line-height:1.6;
      font-size:16px;
@@ -82,6 +103,9 @@ footer{margin-top:44px;border-top:1px solid var(--linea);padding-top:16px}
 footer p{overflow-wrap:anywhere}
 .redes a{margin-right:2px}
 .redes-grandes{display:flex;flex-wrap:wrap;gap:0}
+form label{display:block;margin:10px 0 2px}
+textarea.buscador{resize:vertical;min-height:96px}
+select.buscador{appearance:none;-webkit-appearance:none}
 
 @media (min-width:620px){
   .envoltorio{padding:28px 20px 80px}
@@ -101,10 +125,10 @@ footer p{overflow-wrap:anywhere}
   }catch(e){}
 })();
 </script>
-</head><body><div class="envoltorio">
+</head><body><div class="fondo-banner" style="background-image:url(marca/banner.jpg)" aria-hidden="true"></div><div class="envoltorio">
 <header>
   <div class="fila-titulo">
-    <h1>Offline Online</h1>
+    <div class="marca"><img src="marca/logo.png" alt="Logo de Offline Online" width="56" height="56"><h1>Offline Online</h1></div>
     <button class="tema" id="tema" type="button" aria-label="Cambiar de tema">&#9790;</button>
   </div>
   <nav><a href="index.html">Inicio</a> <a href="series.html">Series</a> <a href="creditos.html" aria-current="page">Créditos y licencias</a></nav>
@@ -117,8 +141,8 @@ footer p{overflow-wrap:anywhere}
 su autor y su licencia, tal como los devuelve la fuente.</p>
 <p class="suave chico">1277 archivos acreditados de Freesound. La lista se genera
 automáticamente desde los registros de descarga, así que no se desactualiza.
-Actualizada el 20 de agosto de 2026. Si usamos algo tuyo y falta el crédito o querés que lo
-saquemos, escribinos a <a href="mailto:cosmosveloz@gmail.com">cosmosveloz@gmail.com</a> y lo resolvemos.</p>
+Actualizada el 20 de agosto de 2026. Si usamos algo tuyo y falta el crédito o quieres que lo
+quitemos, escríbenos a <a href="mailto:cosmosveloz@gmail.com">cosmosveloz@gmail.com</a> y lo resolvemos.</p>
 
 <div class="tabla-scroll">
 <table class="angosta"><thead><tr><th>Licencia</th><th>Archivos</th><th>Qué exige</th></tr></thead>
@@ -145,8 +169,8 @@ que permite el uso comercial y no exige atribución. Se acredita igual.</p>
 
 <h2>Sobre los manhwa</h2>
 <p>Los resúmenes son obra derivada con fines de comentario y crítica. Los
-derechos de cada obra pertenecen a sus autores y editoriales. Si sos titular de
-derechos y querés plantear algo, escribí a
+derechos de cada obra pertenecen a sus autores y editoriales. Si eres titular de
+derechos y quieres plantear algo, escribe a
 <a href="mailto:cosmosveloz@gmail.com">cosmosveloz@gmail.com</a>.</p>
 
 <script>
