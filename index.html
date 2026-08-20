@@ -4,40 +4,109 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Offline Online — resúmenes de manhwa en español</title>
 <meta name="description" content="Resúmenes narrados de manhwa en español del canal Offline Online.">
+<meta name="theme-color" content="#0b0b0d" media="(prefers-color-scheme:dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme:light)">
 <style>
-:root{--fondo:#0b0b0d;--caja:#141418;--linea:#232328;--texto:#eaeaea;
-      --suave:#9a9aa6;--acento:#4fd1ff}
+:root{
+  color-scheme:light dark;
+  --fondo:#ffffff; --caja:#f6f6f8; --linea:#e3e3e9; --texto:#16161a;
+  --suave:#5c5c68; --acento:#0d6e8c; --sobre-acento:#ffffff;
+  --sombra:0 1px 2px rgba(0,0,0,.06);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-tema="claro"]){
+    --fondo:#0b0b0d; --caja:#141418; --linea:#232328; --texto:#eaeaea;
+    --suave:#9a9aa6; --acento:#4fd1ff; --sobre-acento:#0b0b0d;
+    --sombra:none;
+  }
+}
+:root[data-tema="oscuro"]{
+  --fondo:#0b0b0d; --caja:#141418; --linea:#232328; --texto:#eaeaea;
+  --suave:#9a9aa6; --acento:#4fd1ff; --sobre-acento:#0b0b0d;
+  --sombra:none;
+}
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--fondo);color:var(--texto);line-height:1.6;
-     font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-.envoltorio{max-width:860px;margin:0 auto;padding:28px 20px 80px}
-header{border-bottom:1px solid var(--linea);padding-bottom:18px;margin-bottom:26px}
-h1{font-size:30px;margin:0 0 6px}
-h2{font-size:20px;margin:34px 0 10px;color:var(--acento)}
-h3{font-size:15px;margin:22px 0 6px}
+     font-size:16px;
+     font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+.envoltorio{max-width:880px;margin:0 auto;padding:18px 16px 64px}
+header{border-bottom:1px solid var(--linea);padding-bottom:14px;margin-bottom:22px}
+.fila-titulo{display:flex;align-items:center;justify-content:space-between;gap:12px}
+h1{font-size:23px;margin:0 0 4px;line-height:1.25}
+h2{font-size:19px;margin:30px 0 8px;color:var(--acento)}
+h3{font-size:16px;margin:0 0 4px}
 p{margin:10px 0}
 a{color:var(--acento)}
-nav a{margin-right:16px;font-size:15px}
+nav{display:flex;flex-wrap:wrap;gap:14px}
+nav a{font-size:15px;padding:6px 0;text-decoration:none}
+nav a[aria-current]{text-decoration:underline;text-underline-offset:4px}
 .suave{color:var(--suave)}
-.chico{font-size:13px}
-.boton{display:inline-block;background:var(--acento);color:#0b0b0d;font-weight:700;
-       padding:11px 20px;border-radius:999px;text-decoration:none;margin:6px 8px 6px 0}
-.boton.sec{background:transparent;color:var(--texto);border:1px solid var(--linea);font-weight:500}
-.tarjeta{background:var(--caja);border:1px solid var(--linea);border-radius:10px;
-         padding:14px 16px;margin:12px 0}
-table{border-collapse:collapse;width:100%;font-size:13px}
-th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--linea);
+.chico{font-size:13.5px}
+.boton{display:inline-block;background:var(--acento);color:var(--sobre-acento);
+       font-weight:700;padding:13px 22px;border-radius:999px;text-decoration:none;
+       margin:6px 8px 6px 0;min-height:44px;line-height:1.3}
+.boton.sec{background:transparent;color:var(--texto);border:1px solid var(--linea);
+           font-weight:500}
+.tarjeta{background:var(--caja);border:1px solid var(--linea);border-radius:12px;
+         padding:14px 16px;margin:12px 0;box-shadow:var(--sombra)}
+
+/* Series */
+.rejilla{display:grid;grid-template-columns:1fr;gap:14px;margin:14px 0}
+.serie{background:var(--caja);border:1px solid var(--linea);border-radius:12px;
+       overflow:hidden;box-shadow:var(--sombra);display:flex;flex-direction:column}
+.serie .tapa{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;
+             background:var(--linea)}
+.serie .franja{height:4px;background:var(--linea)}
+.serie .cuerpo{padding:13px 15px 15px}
+.etiqueta{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.03em;
+          text-transform:uppercase;padding:3px 9px;border-radius:999px;
+          border:1px solid var(--linea);color:var(--suave);margin-bottom:7px}
+.etiqueta.canal{background:var(--acento);color:var(--sobre-acento);border-color:transparent}
+.nota-seccion{margin:2px 0 0;}
+
+/* Tablas: en el celular se van de ancho si no se las encierra */
+.tabla-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:460px}
+table.angosta{min-width:0}
+th,td{text-align:left;padding:8px;border-bottom:1px solid var(--linea);
       vertical-align:top;word-break:break-word}
 th{color:var(--suave);font-weight:600;position:sticky;top:0;background:var(--fondo)}
-.buscador{width:100%;padding:11px 13px;border-radius:8px;border:1px solid var(--linea);
-          background:var(--caja);color:var(--texto);font-size:15px;margin:8px 0 4px;
+.buscador{width:100%;padding:13px;border-radius:10px;border:1px solid var(--linea);
+          background:var(--caja);color:var(--texto);font-size:16px;margin:8px 0 4px;
           font-family:inherit}
-footer{margin-top:50px;border-top:1px solid var(--linea);padding-top:16px}
-@media(max-width:560px){h1{font-size:24px}.envoltorio{padding:20px 14px 60px}}
+.tema{background:transparent;border:1px solid var(--linea);color:var(--texto);
+      border-radius:999px;min-width:44px;min-height:44px;font-size:17px;
+      cursor:pointer;flex:none;line-height:1}
+footer{margin-top:44px;border-top:1px solid var(--linea);padding-top:16px}
+footer p{overflow-wrap:anywhere}
+.redes a{margin-right:2px}
+.redes-grandes{display:flex;flex-wrap:wrap;gap:0}
+
+@media (min-width:620px){
+  .envoltorio{padding:28px 20px 80px}
+  h1{font-size:30px}
+  h2{font-size:20px}
+  .rejilla{grid-template-columns:1fr 1fr;gap:16px}
+}
+@media (min-width:900px){
+  .rejilla{grid-template-columns:repeat(3,1fr)}
+}
 </style>
+<script>
+(function(){
+  try{
+    var t=localStorage.getItem('tema');
+    if(t){document.documentElement.setAttribute('data-tema',t);}
+  }catch(e){}
+})();
+</script>
 </head><body><div class="envoltorio">
 <header>
-  <h1>Offline Online</h1>
+  <div class="fila-titulo">
+    <h1>Offline Online</h1>
+    <button class="tema" id="tema" type="button" aria-label="Cambiar de tema">&#9790;</button>
+  </div>
   <nav><a href="index.html" aria-current="page">Inicio</a> <a href="series.html">Series</a> <a href="creditos.html">Créditos y licencias</a></nav>
 </header>
 
@@ -48,14 +117,17 @@ por capítulo.</p>
 <p><a class="boton" href="https://youtube.com/@offlineyonline?sub_confirmation=1">Suscribirme en YouTube</a>
 <a class="boton sec" href="series.html">Ver qué series hay</a></p>
 
-<h2>Series cubiertas</h2>
-<ul><li><strong>Blood System</strong> <span class="suave chico">— capítulos 1-5, 8</span></li><li><strong>Healing Agency</strong> <span class="suave chico">— capítulos 1</span></li><li><strong>Miro in Memory</strong> <span class="suave chico">— capítulos 1-10</span></li><li><strong>Superhuman Streamer</strong> <span class="suave chico">— capítulos 10-24</span></li><li><strong>The Postman of the Apocalypse</strong> <span class="suave chico">— capítulos 14-24, 26-27</span></li></ul>
+<h2>Series</h2>
+<h3>En el canal</h3><ul><li><strong>Superhuman Streamer</strong> <span class="suave chico">— Capítulos publicados: 0-24</span></li><li><strong>The Ember Knight</strong> <span class="suave chico">— Capítulos publicados: 1-22</span></li><li><strong>The Postman of the Apocalypse</strong> <span class="suave chico">— Capítulos publicados: 1-13</span></li></ul><h3>En producción</h3><ul><li><strong>Miro in Memory</strong> <span class="suave chico">— Un mundo post-apocalíptico lleno de misterios y secretos, nuestro prota sueña con ser un Heroé, pero no tiene el poder para cumplir su sueño hasta que...</span></li></ul><h3>Próximamente</h3><ul><li><strong>Blood System</strong> <span class="suave chico">— Un prota aspirado a héroe y con un código de No matar a personas, termina siendo trasnformado en todo lo contrario.</span></li><li><strong>Healing Agency</strong> <span class="suave chico">— Un tipo que trabaja como Freelancer exorcizando esperitus malignos a puñetazos.</span></li></ul>
+
+<h2>Seguinos</h2>
+<p class="redes-grandes"><a class="boton sec" href="https://youtube.com/@offlineyonline" rel="me">YouTube</a></p>
 
 <h2>Contacto</h2>
 <div class="tarjeta">
   <p>Para propuestas, colaboraciones o temas de derechos:</p>
   <p><a class="boton sec" href="mailto:cosmosveloz@gmail.com">cosmosveloz@gmail.com</a>
-     <a class="boton sec" href="https://wa.me/14389722148">WhatsApp (negocios)</a></p>
+     <a class="boton sec" href="https://wa.me/14387922148">WhatsApp (negocios)</a></p>
   <p class="suave chico">El correo se revisa seguido. El WhatsApp es exclusivo
      de negocios.</p>
 </div>
@@ -67,6 +139,33 @@ efectos de sonido tienen su licencia y su autor listados
 <a href="creditos.html">en la página de créditos</a>.</p>
 
 <footer class="suave chico">
-  <p>Offline Online · <a href="mailto:cosmosveloz@gmail.com">cosmosveloz@gmail.com</a> · <a href="https://youtube.com/@offlineyonline">Canal de YouTube</a></p>
+  <p>Offline Online · <a href="mailto:cosmosveloz@gmail.com">cosmosveloz@gmail.com</a></p>
+  <p class="redes"><a href="https://youtube.com/@offlineyonline" rel="me">YouTube</a></p>
 </footer>
-</div></body></html>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('tema');
+  if(!b)return;
+  var raiz=document.documentElement;
+  function oscuroAhora(){
+    var t=raiz.getAttribute('data-tema');
+    if(t)return t==='oscuro';
+    return matchMedia('(prefers-color-scheme:dark)').matches;
+  }
+  function pintar(){
+    var o=oscuroAhora();
+    b.textContent=o?'\u2600':'\u263D';
+    b.setAttribute('aria-label',o?'Cambiar a tema claro':'Cambiar a tema oscuro');
+  }
+  b.addEventListener('click',function(){
+    var nuevo=oscuroAhora()?'claro':'oscuro';
+    raiz.setAttribute('data-tema',nuevo);
+    try{localStorage.setItem('tema',nuevo);}catch(e){}
+    pintar();
+  });
+  matchMedia('(prefers-color-scheme:dark)').addEventListener('change',pintar);
+  pintar();
+})();
+</script>
+</body></html>
