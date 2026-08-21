@@ -73,9 +73,16 @@ nav a[aria-current]{text-decoration:underline;text-underline-offset:4px}
 .chico{font-size:13.5px}
 .boton{display:inline-block;background:var(--acento);color:var(--sobre-acento);
        font-weight:700;padding:13px 22px;border-radius:999px;text-decoration:none;
-       margin:6px 8px 6px 0;min-height:44px;line-height:1.3}
-.boton.sec{background:transparent;color:var(--texto);border:1px solid var(--linea);
-           font-weight:500}
+       margin:6px 8px 6px 0;min-height:44px;line-height:1.3;
+       border:0;font-family:inherit;font-size:15px;cursor:pointer;
+       -webkit-tap-highlight-color:transparent}
+/* Foco visible y propio. Sin esto queda el anillo naranja del navegador, que
+   no pega con nada; quitarlo sin reemplazo dejaria la pagina sin foco visible
+   para quien navega con teclado. */
+:where(a,button,input,select,textarea):focus-visible{
+  outline:2px solid var(--acento);outline-offset:2px}
+.boton.sec{background:transparent;color:var(--texto);
+           border:1px solid var(--linea);font-weight:500}
 .tarjeta{background:var(--caja);border:1px solid var(--linea);border-radius:12px;
          padding:14px 16px;margin:12px 0;box-shadow:var(--sombra)}
 
@@ -93,7 +100,8 @@ nav a[aria-current]{text-decoration:underline;text-underline-offset:4px}
 .etiqueta.canal{background:var(--acento);color:var(--sobre-acento);border-color:transparent}
 .nota-seccion{margin:2px 0 0;}
 .entrada{font-size:17px;line-height:1.5}
-.boton.chico-boton{padding:9px 16px;font-size:14px;min-height:0;margin:8px 0 0}
+.boton.chico-boton{padding:9px 15px;font-size:14px;min-height:0;margin:0}
+.partes{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 0}
 
 /* Tablas: en el celular se van de ancho si no se las encierra */
 .tabla-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:10px 0}
@@ -140,7 +148,7 @@ select.buscador{appearance:none;-webkit-appearance:none}
     <div class="marca"><img src="marca/logo.png" alt="Logo de Offline Online" width="56" height="56"><h1>Offline Online</h1></div>
     <button class="tema" id="tema" type="button" aria-label="Cambiar de tema">&#9790;</button>
   </div>
-  <nav><a href="index.html">Inicio</a> <a href="series.html">Series</a> <a href="proximos.html">Próximamente</a> <a href="creditos.html" aria-current="page">Créditos y licencias</a></nav>
+  <nav><a href="index.html">Inicio</a> <a href="series.html">En producción</a> <a href="proximos.html">Próximamente</a> <a href="creditos.html" aria-current="page">Créditos y licencias</a></nav>
 </header>
 
 <h2>Créditos de audio</h2>
